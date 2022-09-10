@@ -1,9 +1,19 @@
 package com.example.demo.DTO;
 
+import com.example.demo.validator.Check;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.Objects;
 
 public class TaskStatusDTO {
+
+    @NotNull(message = "Task's id must be not null")
+    @Positive(message = "Task's id must be positive")
     private int id;
+
+
+    @Check
     private String status;
 
     public void setId(int id) {

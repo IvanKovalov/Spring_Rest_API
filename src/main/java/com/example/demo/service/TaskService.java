@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.ChangeStatus;
 import com.example.demo.DTO.TaskDTO;
 import com.example.demo.DTO.TaskStatusDTO;
-import com.example.demo.TaskStatus;
 import com.example.demo.entity.TaskEntity;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.TaskRepository;

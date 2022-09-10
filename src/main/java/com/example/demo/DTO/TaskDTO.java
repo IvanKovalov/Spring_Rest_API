@@ -1,10 +1,7 @@
 package com.example.demo.DTO;
 
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 
 public class TaskDTO {
 
@@ -15,7 +12,8 @@ public class TaskDTO {
     @NotBlank(message = "Not Valid name")
     private String name;
 
-    @NotNull
+    @NotBlank(message = "Task's description must be not blank")
+    @Size(max = 250, message = "Task's size must be not null")
     private String description;
 
 
@@ -23,9 +21,6 @@ public class TaskDTO {
         this.name = name;
     }
 
-    @Positive
-    @NotNull
-    @Min(2)
     public int getId() {
         return id;
     }
