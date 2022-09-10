@@ -24,8 +24,8 @@ public class BasicAuthWebSecurityConfiguration
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests(authorize -> authorize
-                        .mvcMatchers("/task").hasAnyAuthority("write"))
+                /*.authorizeRequests(authorize -> authorize
+                        .mvcMatchers("/task").hasAnyAuthority("write"))*/
                 .authorizeRequests()
                 .mvcMatchers("/tasks")
                 .hasRole("ADMIN")

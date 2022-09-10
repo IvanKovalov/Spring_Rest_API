@@ -1,9 +1,9 @@
 package com.example.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.example.demo.TaskStatus;
+
+import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +16,13 @@ public class TaskEntity {
     private String name;
 
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status = TaskStatus.Planned;
+
+    private Date creationTime = new Date();
+
+    private Date lastUpdate = creationTime;
 
     public TaskEntity() {
 
@@ -45,8 +52,32 @@ public class TaskEntity {
         return description;
     }
 
-    public TaskEntity(String name, String description) {
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
 
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
+        this.lastUpdate = creationTime;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public TaskEntity(String name, String description) {
         this.name = name;
         this.description = description;
     }
