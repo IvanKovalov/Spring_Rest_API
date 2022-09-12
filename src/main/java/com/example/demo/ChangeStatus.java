@@ -1,21 +1,23 @@
 package com.example.demo;
 
 public class ChangeStatus {
-    public TaskStatus changeStatus(TaskStatus taskStatus, String status){
-        if(taskStatus.equals(TaskStatus.Cancelled)){
-            return TaskStatus.Cancelled;
-        } else if (taskStatus.equals(TaskStatus.Done)) {
-            return TaskStatus.Done;
+    public TaskStatus changeStatus(TaskStatus taskStatus, String expectedStatus){
+        if(taskStatus.equals(TaskStatus.CANCELLED)){
+            return TaskStatus.CANCELLED;
+        } else if (taskStatus.equals(TaskStatus.DONE)) {
+            return TaskStatus.DONE;
         }
-        switch (status){
-            case ("next"):
-                if(taskStatus.equals(TaskStatus.Planned)) {
-                    return TaskStatus.Work_in_progress;
+        switch (expectedStatus){
+            case ("nextStatus"):
+                if(taskStatus.equals(TaskStatus.PLANNED)) {
+                    return TaskStatus.WORK_IN_PROGRESS;
                 }
-                return TaskStatus.Done;
+                return TaskStatus.DONE;
             case ("cancel"):
-                return TaskStatus.Cancelled;
+                return TaskStatus.CANCELLED;
+            default:
+                return TaskStatus.PLANNED;
         }
-        return TaskStatus.Planned;
+
     }
 }

@@ -62,6 +62,14 @@ public class BasicAuthWebSecurityConfiguration
         return new BCryptPasswordEncoder();
     }
 
+
+
+
+
+
+
+
+
   /* @Bean
     public DaoAuthenticationConfigurer daoAuthenticationConfigurer(AuthenticationManagerBuilder builder)
             throws Exception {

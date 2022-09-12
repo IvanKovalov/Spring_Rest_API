@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Check {
-    String message() default "Invalid count of vowel symbol";
+    String message() default "Invalid status of task: type next or cancelled";
 
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};

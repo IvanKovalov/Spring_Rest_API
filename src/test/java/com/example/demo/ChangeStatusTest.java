@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,43 +12,43 @@ public class ChangeStatusTest {
 
     @BeforeEach
     public void createTaskStatus(){
-        this.taskStatus = TaskStatus.Planned;
+        this.taskStatus = TaskStatus.PLANNED;
     }
 
 
     @Test
     public void workInProgressStatusTest(){
-        assertEquals( TaskStatus.Work_in_progress ,changeStatus.changeStatus(taskStatus, "next"));
+        assertEquals( TaskStatus.WORK_IN_PROGRESS,changeStatus.changeStatus(taskStatus, "nextStatus"));
     }
 
     @Test
     public void doneStatusTest(){
-        TaskStatus taskStatusWIP = changeStatus.changeStatus(taskStatus, "next");
-        assertEquals(changeStatus.changeStatus(taskStatusWIP, "next"), TaskStatus.Done);
+        TaskStatus taskStatusWIP = changeStatus.changeStatus(taskStatus, "nextStatus");
+        assertEquals(changeStatus.changeStatus(taskStatusWIP, "nextStatus"), TaskStatus.DONE);
     }
 
     @Test
     public void ifAlreadyDoneStatusTest(){
-        TaskStatus taskStatusWIP = changeStatus.changeStatus(taskStatus, "next");
-        TaskStatus doneStatus = changeStatus.changeStatus(taskStatusWIP, "next");
-        assertEquals(TaskStatus.Done, changeStatus.changeStatus(doneStatus, "next"));
+        TaskStatus taskStatusWIP = changeStatus.changeStatus(taskStatus, "nextStatus");
+        TaskStatus doneStatus = changeStatus.changeStatus(taskStatusWIP, "nextStatus");
+        assertEquals(TaskStatus.DONE, changeStatus.changeStatus(doneStatus, "nextStatus"));
     }
 
     @Test
     public void cancelledStatusTest(){
-        assertEquals(TaskStatus.Cancelled, changeStatus.changeStatus(taskStatus, "cancel"));
+        assertEquals(TaskStatus.CANCELLED, changeStatus.changeStatus(taskStatus, "cancel"));
     }
 
     @Test
     public void ifAlreadyCancelledStatusTest(){
         TaskStatus cancelledStatus = changeStatus.changeStatus(taskStatus, "cancel");
-        assertEquals(TaskStatus.Cancelled, changeStatus.changeStatus(cancelledStatus, "cancel"));
+        assertEquals(TaskStatus.CANCELLED, changeStatus.changeStatus(cancelledStatus, "cancel"));
     }
 
     @Test
     public void incorrectStatusTest(){
 
-        assertEquals(TaskStatus.Planned, changeStatus.changeStatus(taskStatus, "cance"));
+        assertEquals(TaskStatus.PLANNED, changeStatus.changeStatus(taskStatus, "cance"));
     }
 
 }

@@ -1,9 +1,9 @@
 package com.example.demo;
 
 public enum TaskStatus {
-    Planned,
-    Work_in_progress,
-    Done,
-    Cancelled;
+    PLANNED,
+    WORK_IN_PROGRESS,
+    DONE,
+    CANCELLED;
 
 }

@@ -7,7 +7,7 @@ public class  CheckStatus implements ConstraintValidator< Check, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext cxt) {
-        return value.equals("next") || value.equals("cancel");
+        return value.equals("nextStatus") || value.equals("cancel");
     }
 
 }

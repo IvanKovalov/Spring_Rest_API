@@ -19,8 +19,8 @@ public class TaskService {
     @Autowired
     TaskRepository repository;
 
-    final static ChangeStatus changeStatus = new ChangeStatus();
-    final static Logger logger = LoggerFactory.getLogger(TaskService.class);
+    static final ChangeStatus changeStatus = new ChangeStatus();
+    static final Logger logger = LoggerFactory.getLogger(TaskService.class);
 
 
     public TaskEntity updateTask(TaskDTO taskDTO) {
@@ -29,7 +29,6 @@ public class TaskService {
         TaskEntity task = repository.findById(taskDTO.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Task not found on :: "+ taskDTO.getId()));
         logger.info("Found task by id {}", taskDTO.getId());
-
         task.setName(taskDTO.getName());
         logger.info("Updated task's name by id {}", task.getId());
         task.setDescription(taskDTO.getDescription());
@@ -43,18 +42,23 @@ public class TaskService {
 
     }
 
-    public TaskEntity addTask(String name, String description){
+    public TaskEntity addTask(TaskDTO taskDTO){
 
-        TaskEntity task = new TaskEntity(name, description);
-        logger.info("Created new task with name {} and description {}", name , description);
+        TaskEntity task = new TaskEntity(taskDTO.getName(), taskDTO.getDescription());
+        logger.info("Created new task with name {} and description {}", taskDTO.getName() , taskDTO.getDescription());
         TaskEntity addedTask = repository.save(task);
-        logger.info("Saved new task with name {} in DB", name);
+        logger.info("Saved new task with name {} in DB", taskDTO.getName());
+
         return addedTask;
+
     }
 
     public Iterable<TaskEntity> getAllTasks () {
+
         logger.info("List all tasks");
+
         return repository.findAll();
+
     }
 
     public void deleteTaskById (int Id) {
@@ -66,14 +70,25 @@ public class TaskService {
     }
 
     public TaskEntity updateStatus(TaskStatusDTO taskStatusDTO){
+        logger.info("Received taskStatus dto");
         TaskEntity task = repository.findById(taskStatusDTO.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Task not found on :: "+ taskStatusDTO.getId()));
+        logger.info("Take taskEntity from db");
         task.setStatus(changeStatus.changeStatus(task.getStatus(),taskStatusDTO.getStatus()));
-
         task.setLastUpdate(new Date());
+        logger.info("Updated task's status and lastUpdate");
         TaskEntity updatedTask = repository.save(task);
+
         return  updatedTask;
 
+    }
+
+    public TaskEntity getTaskById (int Id) {
+
+        logger.info("Received task's id");
+        TaskEntity getTask = repository.getReferenceById(Id);
+        logger.info("Get task by id {}", Id);
+        return getTask;
     }
 
 }

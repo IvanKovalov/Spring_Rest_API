@@ -18,7 +18,7 @@ public class TaskEntity {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private TaskStatus status = TaskStatus.Planned;
+    private TaskStatus status = TaskStatus.PLANNED;
 
     private Date creationTime = new Date();
 
