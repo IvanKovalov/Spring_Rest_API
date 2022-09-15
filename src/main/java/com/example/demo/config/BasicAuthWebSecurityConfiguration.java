@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 
@@ -34,8 +33,8 @@ public class BasicAuthWebSecurityConfiguration
                 .mvcMatchers("/hello")
                 .hasRole("USER")
                 .and()
-                .authorizeRequests().anyRequest().authenticated()
-                .and()
+                /*.authorizeRequests().anyRequest().authenticated()
+                .and()*/
                 .httpBasic();
 
         return http.build();

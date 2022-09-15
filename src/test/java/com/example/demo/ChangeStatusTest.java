@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ChangeStatusTest {
+ class ChangeStatusTest {
     TaskStatus taskStatus;
     ChangeStatus changeStatus = new ChangeStatus();
 
@@ -17,36 +17,36 @@ public class ChangeStatusTest {
 
 
     @Test
-    public void workInProgressStatusTest(){
+    void workInProgressStatusTest(){
         assertEquals( TaskStatus.WORK_IN_PROGRESS,changeStatus.changeStatus(taskStatus, "nextStatus"));
     }
 
     @Test
-    public void doneStatusTest(){
+    void doneStatusTest(){
         TaskStatus taskStatusWIP = changeStatus.changeStatus(taskStatus, "nextStatus");
-        assertEquals(changeStatus.changeStatus(taskStatusWIP, "nextStatus"), TaskStatus.DONE);
+        assertEquals(TaskStatus.DONE, changeStatus.changeStatus(taskStatusWIP, "nextStatus"));
     }
 
     @Test
-    public void ifAlreadyDoneStatusTest(){
+     void ifAlreadyDoneStatusTest(){
         TaskStatus taskStatusWIP = changeStatus.changeStatus(taskStatus, "nextStatus");
         TaskStatus doneStatus = changeStatus.changeStatus(taskStatusWIP, "nextStatus");
         assertEquals(TaskStatus.DONE, changeStatus.changeStatus(doneStatus, "nextStatus"));
     }
 
     @Test
-    public void cancelledStatusTest(){
+    void cancelledStatusTest(){
         assertEquals(TaskStatus.CANCELLED, changeStatus.changeStatus(taskStatus, "cancel"));
     }
 
     @Test
-    public void ifAlreadyCancelledStatusTest(){
+     void ifAlreadyCancelledStatusTest(){
         TaskStatus cancelledStatus = changeStatus.changeStatus(taskStatus, "cancel");
         assertEquals(TaskStatus.CANCELLED, changeStatus.changeStatus(cancelledStatus, "cancel"));
     }
 
     @Test
-    public void incorrectStatusTest(){
+    void incorrectStatusTest(){
 
         assertEquals(TaskStatus.PLANNED, changeStatus.changeStatus(taskStatus, "cance"));
     }

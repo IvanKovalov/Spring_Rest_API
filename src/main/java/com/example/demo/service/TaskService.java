@@ -22,10 +22,12 @@ public class TaskService {
     static final ChangeStatus changeStatus = new ChangeStatus();
     static final Logger logger = LoggerFactory.getLogger(TaskService.class);
 
+    static final String RECEIVED_ID = "Received task's id";
+
 
     public TaskEntity updateTask(TaskDTO taskDTO) {
 
-        logger.info("Received task's id");
+        logger.info(RECEIVED_ID);
         TaskEntity task = repository.findById(taskDTO.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Task not found on :: "+ taskDTO.getId()));
         logger.info("Found task by id {}", taskDTO.getId());
@@ -61,11 +63,11 @@ public class TaskService {
 
     }
 
-    public void deleteTaskById (int Id) {
+    public void deleteTaskById (int id) {
 
-        logger.info("Received task's id");
-        repository.deleteById(Id);
-        logger.info("Deleted task by id {}", Id);
+        logger.info(RECEIVED_ID);
+        repository.deleteById(id);
+        logger.info("Deleted task by id {}", id);
 
     }
 
@@ -77,17 +79,15 @@ public class TaskService {
         task.setStatus(changeStatus.changeStatus(task.getStatus(),taskStatusDTO.getStatus()));
         task.setLastUpdate(new Date());
         logger.info("Updated task's status and lastUpdate");
-        TaskEntity updatedTask = repository.save(task);
-
-        return  updatedTask;
+        return repository.save(task);
 
     }
 
-    public TaskEntity getTaskById (int Id) {
+    public TaskEntity getTaskById (int id) {
 
-        logger.info("Received task's id");
-        TaskEntity getTask = repository.getReferenceById(Id);
-        logger.info("Get task by id {}", Id);
+        logger.info(RECEIVED_ID);
+        TaskEntity getTask = repository.getReferenceById(id);
+        logger.info("Get task by id {}", id);
         return getTask;
     }
 
